@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      font-family: 'Jua', sans-serif;
+    }
+
+    .wrap {
+      margin: 10px auto 30px auto;
+      width: 500px;
+    }
+
+    .btn-box {
+        width: 500px;
+        text-align: center;
+    }
+
+  </style>
+
+  <script>
+    function buy() {
+      alert("주문성공");
+    }
+
+  </script>
+
+  <title>Homework 1</title>
+</head>
+
+<body>
+  <div class="wrap">
+    <div>
+      <P><img src="http://blogfiles.naver.net/MjAyMDA0MDJfMjY3/MDAxNTg1ODIwNTQ0MDA2.LTY7vK1UDAG8SSdGaTVtbLJd2OXUN3LM5DpO1CeYZowg.9M9ZCWqm4oD_WqoaLjiAiBENXOzPBm7Ymo9ExU800sAg.PNG.sksmscjstksla/1.PNG">
+      </P>
+    </div>
+    <div>
+      <p> <span style="font-size: 40px;">라면 팔아요</span>
+        <span style="font-size: 20px;"> 가격 : 20000원 / 박스 </span>
+        <br>라면이 아주 맛있어요. 1박스에 30개가 들어있어요. 아침점심저녁 세끼 몽땅 라면만 먹어도 10일을 먹을 수 있는 갯수입니다. 라면사세요.
+      </p>
+    </div>
+    <div class="order-box">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">주문자성함</span>
+        </div>
+        <input type="text" class="form-control" id="nameInput" aria-describedby="basic-addon3">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">수량</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01">
+          <option selected>-- 수량을 선택하세요 --</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">주소</span>
+        </div>
+        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon3">전화번호</span>
+        </div>
+        <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+      </div>
+    </div>
+    <div class="btn-box">
+      <button onclick="buy()" type="button" class="btn btn-primary">주문하기</button>
+    </div>
+  </div>
+</body>
+
+</html>
