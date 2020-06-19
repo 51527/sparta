@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <style>
+    * {
+      font-family: 'Jua', sans-serif;
+    }
+
+    .wrap {
+      margin: 10px auto 30px auto;
+      width: 500px;
+    }
+
+    .button {
+      margin: auto;
+      width: 15%;
+    }
+  </style>
+
+  <script>
+    $(document).ready(function () {
+      $('#orders-box').html('');
+      listing();
+    });
+
+    function make_shopping() {
+      let name = $('#nameInput').val();
+      let buynum = $('#buynumSelect').val();
+      let address = $('#addressInput').val();
+      let phonenum = $('#phonenumInput').val();
+
+      if (name == '') {
+        alert("이름을 입력해주세요");
+      } else if (buynum == '') {
+        alert("수량을 선택해주세요");
+      } else if (address == '') {
+        alert("주소를 입력해주세요");
+      } else if (phonenum == '') {
+        alert("번호를 입력해주세요");
+      }
+
+      $.ajax({
+        type: 'POST', // 타입을 작성합니다.
+        url: '/shopping', // url을 작성합니다.
+        data: {name_give: name, buynum_give: buynum, address_give: address, phonenum_give: phonenum}, // data를 작성합니다. },
+        success: function (response) {
+          if (response['result'] == 'success') {
+            alert(response['msg']);
+            window.location.reload();
+          }
+        }
+      });
+    }
+
+    function listing() {
+      $.ajax({
+        type: "GET",
+        url: "/shopping",
+        data: {},
+        success: function (response) {
+          if (response['result'] == 'success') {
+            let shoppings = response['shoppings'];
+            
+            for(let i = 0; i < shoppings.length; i++){
+              let name = shoppings[i]['name']
+              let buynum = shoppings[i]['buynum']
+              let address = shoppings[i]['address']
+              let phonenum = shoppings[i]['phonenum']
+              make_card(name, buynum, address, phonenum)
+            }
+        
+          } else {
+            alert('주문목록을 받아오지 못했습니다');
+          }
+        }
+      });
+    }
+
+    function make_card(name, buynum, address, phonenum) {
+    let temp_html = `<tr>
+                        <td>${name}</td>
+                        <td>${buynum}</td>
+                        <td>${address}</td>
+                        <td>${phonenum}</td>
+                    </tr>`;
+    $('#orders-box').append(temp_html);
+}
+  </script>
+
+  <title>Homework 4</title>
+</head>
+
+<body>
+  <div class="wrap">
+    <div>
+      <P><img
+          src="http://image.nongshim.com/non/pro/03_product.jpg">
+      </P>
+    </div>
+    <div>
+      <p> <span style="font-size: 40px;">라면 팔아요</span>
+        <span style="font-size: 20px;"> 가격 : 20000원 / 박스 </span>
+        <br>라면이 아주 맛있어요. 1박스에 30개가 들어있어요. 아침점심저녁 세끼 몽땅 라면만 먹어도 10일을 먹을 수 있는 갯수입니다. 라면사세요.
+      </p>
+    </div>
+    <div>
+      <div class="form-group">
+        <label>주문자 이름</label>
+        <input type="text" class="form-control" id="nameInput" placeholder="이름을 입력해주세요">
+      </div>
+      <div class="form-group">
+        <label>수량</label>
+        <select class="form-control" id="buynumSelect">
+          <option selected value=""> -- 수량을 선택하세요 -- </option>
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>주소</label>
+        <input type="text" class="form-control" id="addressInput" placeholder="주소를 입력해주세요">
+      </div>
+      <div class="form-group">
+        <label>전화번호</label>
+        <input type="text" class="form-control" id="phonenumInput" placeholder="전화번호를 입력해주세요">
+      </div>
+      <div class="button"><button onclick="make_shopping()" type="button" class="btn btn-primary">주문하기</button></div>
+    </div>
+    <p>
+    <div class="orders">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">이름</th>
+            <th scope="col">수량</th>
+            <th scope="col">주소</th>
+            <th scope="col">전화번호</th>
+          </tr>
+        </thead>
+        <tbody id="orders-box">
+        </tbody>
+      </table>
+    </div>
+    </p>
+</body>
+
+</html>
